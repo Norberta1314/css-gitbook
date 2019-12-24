@@ -1,0 +1,13 @@
+{
+  "generator": "site",
+  "title": "css",
+  "plugins": [],
+  "pluginsConfig": {
+      "fontSettings": {
+          "theme":  "night",
+          "family":  "sans",
+          "size": 2
+      }
+  },
+  "variables": {}
+}
