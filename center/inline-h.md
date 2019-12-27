@@ -67,9 +67,21 @@ span {
 
 `display:table-cell` 会被 `float`,`absolute` 破坏，所以不可以和 `float`，`absolute` 同时使用
 
-`display:table-cell` 对宽度敏感： `table-cell` 内的元素宽度设置为： width:100% 的时候，因为这是一种规范未定义行为，不同的浏览器会产生不同的效果
+`display:table-cell` 对宽度高度敏感： `table-cell` 内的元素宽度设置为： width:100% 的时候，因为这是一种规范未定义行为，不同的浏览器会产生不同的效果
 
-除此之外，`table-cell` 在垂直居中一届中还是占很高的地位的，尤其是在父元素高度未知的场景下，并且比 `translate` 更好在兼容性更强一些
+`display:table-cell` 还有`创建匿名表格元素`的规则，什么是创建匿名表格元素呢？
+
+> [css 创建匿名表格元素](w3.org/TR/CSS2/tables.html#anonymous-boxes)
+>
+> Document languages other than HTML may not contain all the elements in the CSS 2.1 table model. In these cases, the "missing" elements must be assumed in order for the table model to work.` Any table element will automatically generate necessary anonymous table objects around itself, consisting of at least three nested objects corresponding to a 'table'/'inline-table' element, a 'table-row' element, and a 'table-cell' element`. Missing elements generate [anonymous](https://www.w3.org/TR/CSS2/visuren.html#anonymous) objects (e.g., anonymous boxes in visual table layout) according to the following rules:
+>
+> 任何表格元素将自动在它周围自动生成匿名表格对象，由至少三个对应的嵌套对象组成 :`table/inline-table`元素，`table-row`元素、`table-cell`元素。
+>
+> 说人话就是：如果我只对 A 元素定义了 table-cell ，浏览器会自动为它生成  `table-row` 的爸爸和`table/inline-table` 的爷爷
+
+除此之外，`table-cell` 在垂直居中一届中还是占很高的地位的，尤其是在父元素高度未知的场景下，并且比 `translate` 更好在兼容性更强一些。
+
+（小预告：在考虑对 IE 兼容性的情况下，有一种垂直居中是其他方式很难实现的，只能用 table-cell ，我们在后期会揭晓
 
 在我们需要使用 `margin` 的时候，我们要用什么方式居中呢？
 
@@ -120,9 +132,9 @@ span {
 
 其实更简单粗暴的居中方式是使用 flex 居中，附上阮一峰老师的[ flex教程](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)，这里提及一些我们这里常用的
 
-`justify-content`属性定义了项目在主轴（水平）上的对齐方式。
+`justify-content` 属性定义了项目在主轴（水平）上的对齐方式。
 
-`justify-content`可取值：
+`justify-content `可取值：
 
 - flex-start（默认值）：左对齐
 - flex-end：右对齐
@@ -130,11 +142,11 @@ span {
 - space-between：两端对齐，项目之间的间隔都相等。
 - space-around：每个项目两侧的间隔相等（类似margin-left = margin-right）。
 
-父级使用`display:flex` `justify-content:center`轻松实现元素的水平居中
+父级使用 `display:flex` `justify-content:center `轻松实现元素的水平居中
 
-`align-items`属性定义项目在交叉轴（垂直）上如何对齐
+`align-items` 属性定义项目在交叉轴（垂直）上如何对齐
 
-`align-items`可取值：
+`align-items` 可取值：
 
 - flex-start：交叉轴的起点对齐。
 - flex-end：交叉轴的终点对齐。
@@ -142,21 +154,28 @@ span {
 - baseline: 项目的第一行文字的基线对齐。
 - stretch（默认值）：如果项目未设置高度或设为 auto，将占满整个容器的高度。
 
-父级使用`display:flex` ` align-items:center`可以轻松实现元素的垂直居中
+父级使用 `display:flex` ` align-items:center` 可以轻松实现元素的垂直居中
 
-`flex`作为现代的布局方案，只需要几行代码就能优雅的实现垂直水平居中，然而这么逆天的神器，为什么没有作为最佳实践呢？因为神器目前还有缺陷。
+`flex `作为现代的布局方案，只需要几行代码就能优雅的实现垂直水平居中，然而这么逆天的神器，为什么没有作为最佳实践呢？因为神器目前还有缺陷。
 
-当前来说，移动端基本支持`flex`布局，而pc端flex在支持ie6-9上还存在一些问题，所以在移动端布局方案中，`flex`推荐适用。
+当前来说，移动端基本支持 `flex` 布局，而pc端flex在支持ie6-9上还存在一些问题，所以在移动端布局方案中，`flex  `推荐适用。
 
-另外，适用`flex`布局需要注意的是：`flex`容器内子元素的`float`、`clear`和`vertical-align`属性将失效，所有子元素自动成为容器成员`flex item`。
+另外，适用 `flex` 布局需要注意的是：`flex` 容器内子元素的 `float`、`clear` 和 `vertical-align` 属性将失效，所有子元素自动成为容器成员 `flex item`。
 
 # 分割场景，布局经验
 
-读到这里，相信大家对元素的垂直水平居中问题有了比较明确的了解了，但是在实际操作中，场景往往是多变的，所以说，想要在实际开发中处理垂直水平居中问题，还需要有对场景处理的经验和原则
+读到这里，相信大家对元素的垂直水平居中问题有了比较明确的了解了，但是在实际操作中，场景往往是多变的，垂直和水平居中往往是需要交杂在一起处理，所以，想要在实际开发中处理垂直水平居中问题，还需要有对场景处理的经验和原则。
 
-比如说，我们学会了对块级元素的垂直水平居中，可以轻轻松松的实现元素的垂直水平居中，那么，现在有三个块级元素，要全部实现居中呢？比如下面的场景:
-要实现多个块级元素的垂直水平居中，我们不妨给三个子元素设置为	inline-block	后外面套一个	div	，然后问题就变成了单个块级元素的水平居中问题
+考虑复杂的场景：
 
-假如场景再复杂，变成多行块级元素，每行都有多个块级元素，那么处理问题的一般思路，都是给每一行的元素套一个父级后又给这些父级再嵌套一个父级，直到问题化简成一个块级元素的水平居中问题。
+<img src='./img/img-4.png'>
 
-这里我们就能总结出一个规律了，对于情况复杂的场景，要实现垂直水平居中的布局，那么，我们要分解问题，将复杂多变的场景，分解成可控的单一场景，比如，将多个块级元素的垂直水平居中问题，变成一个块级元素的垂直水平居中问题等等，这样，轻轻松松就解决了css中令人头疼的居中问题了。
+绿色的盒子该如何布局呢？，我们可以把问题拆解开：
+
+<img src='./img/img-5.png'>
+
+将问题转化为使用绿色盒子相对紫色盒子 `text-align: justify` , 紫色盒子相对粉色盒子垂直水平居中。
+
+如果发现实际业务场景中遇到比较复杂的居中问题，不妨拆解开，把每个元素身上背负的责任减少，一一化解，变成单一可控的问题。
+
+这样子，css 居中问题就轻轻松松解决啦！
