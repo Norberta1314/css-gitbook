@@ -1,20 +1,8 @@
-## 页头固定
-网页上的 header 相对浏览器窗口固定是最常见不过的需求了，但是对于新手可能还摸不到门路，我们可以使用fixed 固定 header,达到以下效果：
+# 第2节：菜单栏
 
-### 页面滚动而页头不滚动：
-<img src='https://uploader.shimo.im/f/jDyYst7QbeIok7q2.gif' >
-
-```css
-header {
-  height: 30px;
-  position: fixed;
-  width: 100%;//注意设置width使宽度达到父元素 100% 贯穿屏幕从左到右
-}
-```
-## 菜单栏固定
 除了页头固定，我们经常遇见下方gif所展示的业务场景：
 
-![图片](https://uploader.shimo.im/f/Z30xq9AjCpYoCiEV.gif)
+<img src='./img/layout-2.gif' >
 
 我们要解决的三个问题是
 
@@ -34,7 +22,7 @@ aside {
   float:left
 }
 ```
-![图片](https://uploader.shimo.im/f/Ky9lfBinziIX6TOg.png!thumbnail)
+<img src='./img/layout-1.png' >
 
 但是布局的菜单部分与右边正文部分分界并不明显，我们需要借助正文部分的 margin 使两边分界明显：
 
@@ -69,7 +57,7 @@ aside {
   overflow:scroll;
 }
 ```
-![图片](https://uploader.shimo.im/f/ik2ZYTeXQZge50bF.gif)
+<img src='./img/layout-3.gif' >
 
 叮！一不小心，出现了更高级（混合）的需求：
 
@@ -83,11 +71,11 @@ header {
 ```
 但是我们发现—咦？正文部分怎么被遮挡了一块
 
-![图片](https://uploader.shimo.im/f/tgx9ViIE9ZIYI2za.png!thumbnail)
+<img src='./img/layout-2.png' >
 
 我们继续对 正文部分施以 margin-top 时，却发现不管用了
 
-![图片](https://uploader.shimo.im/f/MnBF1oxxAMEGK5OJ.png!thumbnail)
+<img src='./img/layout-3.gif' >
 
 正文部分的 section 不仅仅把自己推下来了，还把菜单栏以及 header 推下来了，检查元素后我们发现， 对正文部分设置的 margin-top, 正文部分的 margin-top 与 body 部分的 margin-top 发生了margin 合并，解决此处 margin 合并的办法有很多， 可以对对父元素（body）设置成 BFC 元素、给body加 1px 的padding，使 section 的 margin-top 变为 padding-top ,但是每种方法都有一些后遗症，读者可以根据自己的业务所在的情景选择使用哪种 BFC 方式
 
@@ -102,55 +90,3 @@ header {
 > SEO: （**Search Engine Optimization**）：汉译为搜索引擎优化。
 
 考虑到搜索引擎优化，我们需要将正文部分放到菜单栏（无关紧要）的部分之前，这要如何实现呢？这里容我先卖个小关子，下一节内容我们再进行揭晓
-
-## 页脚的难题
-
-当我们拿到类似下面这样的设计稿：
-
-<img src='./img/img1.png' width="300px">
-
-看起来简单无比！我们只需要把footer fixed 到页面底部就可以了，但是实际使用中，当正文部分变长的时候，就会出现：
-
-<img src='./img/img2.png' width="300px">
-
-咦？ Footer 把上面正文部分遮住了，那怎么办呢？好主意！把footer放到文档流最后，不使用 fixed 了，然而……
-
-<img src='./img/img3.png' width="300px">
-
-忍不住骂出xxx
-
-但是问题还是需要解决的：我们需要：使内容高度小于浏览器高度时页脚在页面底部，内容高度大于浏览器窗口高度时页脚在文档流最后，首先我们要调整一下html结构：
-
-```
-<div class="container">
-  <header/>
-  <div class="page">
-    <aside/>
-    <section/>
-  </div>
-  <footer/>
-</div>
-```
-再利用 mini-height 与 height 的魔法解决问题：
-```
-body html {
-  padding: 0;
-  margin:0;
-  height: 100%;//设置height使子元素可以设置百分比高度
-}
-.container {
-  min-height: 100%;//使内容很少时能保持100%的高度
-  position:relative;//以便于里面的元素进行绝对定位后不会跑出 div.container
-}
-.page {
-  padding-bottom: 30px;//footer的高度
-}
-footer {
-  position: absolute;
-  height:30px
-  width:100%;
-  bottom:0;
-}
-```
-![图片](https://uploader.shimo.im/f/wmdzSaTlUgg6dKMg.gif)
-
