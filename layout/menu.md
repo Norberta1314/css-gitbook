@@ -2,7 +2,7 @@
 
 除了页头固定，我们经常遇见下方gif所展示的业务场景：
 
-![图片](https://uploader.shimo.im/f/Z30xq9AjCpYoCiEV.gif)
+<img src='./img/layout-2.gif' >
 
 我们要解决的三个问题是
 
@@ -22,7 +22,7 @@ aside {
   float:left
 }
 ```
-![图片](https://uploader.shimo.im/f/Ky9lfBinziIX6TOg.png!thumbnail)
+<img src='./img/layout-1.png' >
 
 但是布局的菜单部分与右边正文部分分界并不明显，我们需要借助正文部分的 margin 使两边分界明显：
 
@@ -57,7 +57,7 @@ aside {
   overflow:scroll;
 }
 ```
-![图片](https://uploader.shimo.im/f/ik2ZYTeXQZge50bF.gif)
+<img src='./img/layout-3.gif' >
 
 叮！一不小心，出现了更高级（混合）的需求：
 
@@ -71,11 +71,11 @@ header {
 ```
 但是我们发现—咦？正文部分怎么被遮挡了一块
 
-![图片](https://uploader.shimo.im/f/tgx9ViIE9ZIYI2za.png!thumbnail)
+<img src='./img/layout-2.png' >
 
 我们继续对 正文部分施以 margin-top 时，却发现不管用了
 
-![图片](https://uploader.shimo.im/f/MnBF1oxxAMEGK5OJ.png!thumbnail)
+<img src='./img/layout-3.gif' >
 
 正文部分的 section 不仅仅把自己推下来了，还把菜单栏以及 header 推下来了，检查元素后我们发现， 对正文部分设置的 margin-top, 正文部分的 margin-top 与 body 部分的 margin-top 发生了margin 合并，解决此处 margin 合并的办法有很多， 可以对对父元素（body）设置成 BFC 元素、给body加 1px 的padding，使 section 的 margin-top 变为 padding-top ,但是每种方法都有一些后遗症，读者可以根据自己的业务所在的情景选择使用哪种 BFC 方式
 
