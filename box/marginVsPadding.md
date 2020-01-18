@@ -12,7 +12,7 @@
 
 更令人困惑的是：
 
-![图片](https://uploader.shimo.im/f/C32jA4OIV6cmLi1U.png!thumbnail)
+<img src='./img/img_1.png' width=300/>
 
 上图， 高度 x 可以理解为黄盒子的内边距，也可以理解为蓝盒子的外边距，这就让人很烦恼了。
 
@@ -20,7 +20,7 @@
 
 ### 卡片包含卡片
 
-![图片](https://uploader.shimo.im/f/29G0UyEvSggr5ugY.png!thumbnail)
+<img src='./img/img_2.png' width=300/>
 
 第一种情况也是相对简单一些的情况， YellowCard 内包含 BlueCard，我们可以用CSS来表示这种情况：
 
@@ -41,7 +41,7 @@
 
 却出现了以下的问题：
 
-![图片](https://uploader.shimo.im/f/QdLop4az5XkQPPic.png!thumbnail)
+<img src='./img/img_3.png' width=300/>
 
 因为发生了垂直方向的 margin 合并，设置的 margin-top 并没有达到我们想要的效果，需要对 Yellow 进行 BFC，但是无论哪一种 BFC 方式，都会产生或大或小的后遗症，此时我们就可以选择将边距 A 理解成 Yellow 的内边距，改为给 Yellow 设置 padding，此时垂直方向的问题就解决了。
 
@@ -53,7 +53,7 @@
 
  除了 Yellow 内只有一个 Blue 盒子，还有很多复杂的场景，比如：多个盒子并排显示
 
-![图片](https://uploader.shimo.im/f/SSE67gJTo64Myg60.png!thumbnail)
+<img src='./img/img_4.png' width=300/>
 
 当多个 Card 并排显示的时候，怎么照顾他们的 margin 和 padding？
 
@@ -61,7 +61,7 @@ Card 并排显示，对垂直方向没有影响，垂直方向可以继续依照
 
 因为 Blue 和 Pink 在水平方向居中，所以我们需要 B = D，但是 如果 B 使用 Blue 的 margin-left, D 使用 Pink 的 margin-right， 很明显 B、 D 又不是一体的了，并且这样也实现不了元素宽度位置垂直居中，所以我们需要让 B 和 D 依托到另外一个盒子上：我们需要给 Blue 和 Pink 再增加一个父元素 BluePinkWarp，同时 BluePinkWarp 是 Yellow 的子元素，如下：
 
-![图片](https://uploader.shimo.im/f/ZSdAMAiv4Zg4fs2U.png!thumbnail)
+<img src='./img/img_5.png' width=300/>
 
 我们让 White 来完成 B 和 D，给 White 添加 margin-left 和 margin-right 分别作为 B 和 D
 

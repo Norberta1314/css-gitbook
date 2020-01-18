@@ -10,7 +10,7 @@
 
 ### inline 还是 block？
 
-![图片](https://uploader.shimo.im/f/hCIag73U2qkEfYrN.png!thumbnail)
+<img src='./img/img_1.png' width=400/>
 
 如图，text1需要溢出时表示省略号，text2需要围绕 img。
 
@@ -43,17 +43,17 @@ text-overflow:ellipsis;
 ```
 
 然后发现：
-![图片](https://uploader.shimo.im/f/1BRAElqd6lMofuwf.png!thumbnail)
+<img src='./img/img_2.png' width=400 />
 
 咦？事情并没有像我们想象的这么简单，title 没有依照约定好的规则在 img 后面，而是缩进到了 img 下面，这可怎么办！
 
 通过审查元素我们发现：
 
-![图片](https://uploader.shimo.im/f/tBov00OxHy4B9TDy.png!thumbnail)
+<img src='./img/img_3.png' width=400/>
 
 .title 的 width 并没有像我们预期中的缩起来为 500 - 150 = 350， 而是根据 title 本身的长度，延伸到了 419，通过一项一项筛检元素我们发现，是 white-space: nowrap; 属性导致 title 的长度很“硬气”得折不断。那怎么样才能使 title 「折腰」呢？先不卖关子了，给 title 设置 display:block 就可以了：
 
-![图片](https://uploader.shimo.im/f/i710XpniP30eU5l9.png!thumbnail)
+<img src='./img/img_4.png' width=400/>
 
 确认过眼神，是我们想要的效果！
 
@@ -61,7 +61,7 @@ text-overflow:ellipsis;
 
 ！这里我们可以直接用 h1-h6 标签啊！本身表达的就是标题的含义，而 h1-h6 也是block 属性，这样我们就可以直接实现效果了：
 
-![图片](https://uploader.shimo.im/f/kmq891K7pX4c5jmC.png!thumbnail)
+<img src='./img/img_8.png' width=400/>
 
 虽然有骚操作，但是截止现在我们解决的都是单行文本的省略号，如果我们的业务场景是要对多行文本实现省略号怎么解决！
 
@@ -131,6 +131,6 @@ background:#fff;
 
 就是不管文字是一行还是两行，warp 都会占两行的位置，
 
-![图片](https://uploader.shimo.im/f/Z2rGmMTppzUW0MGj.png!thumbnail)
+<img src='./img/img_5.png' width=400/>
 
 看来到现在位置， 使多行文本居中还没有找到纯 CSS 实现靠谱的解决方案。如果要完美高度实现CSS

@@ -4,7 +4,7 @@
 
 > 标准盒子模型： width = content 
 >
-> > 怪异盒子模型： width = content + padding + border
+> 怪异盒子模型： width = content + padding + border
 
 在一些低版本的 IE 浏览器展示的是怪异盒子模型，为了编写 CSS 逻辑的统一，需要避免IE 触发怪异盒模型：使用`<!DOCTYPE html>`声明，告诉IE采用W3C盒子模型。
 
@@ -20,11 +20,11 @@
 
 当 UI 给我们的设计稿有类似这样的模型：
 
-![图片](https://uploader.shimo.im/f/Xr8aPf8IHYwvbH0o.png!thumbnail)
+<img src='./img/img_7.png' width=400/>
 
 我们其实不好计算/测量 content 的宽度，此时将 box-sizing:border-box,然后：
 
-![图片](https://uploader.shimo.im/f/7lvkPXt4lCEenilr.png!thumbnail)
+<img src='./img/img_8.png' width=400/>
 
 这样我们并不用计算 content 就可以还原设计稿了，比较方便。
 
@@ -41,5 +41,7 @@
 针对2: 现在都 9102 年了，除了一些特殊为特殊机关单位写的网站我认为可以不用考虑 IE6/7 的兼容了。
 
 针对3: 我没有想到上面我描述的场景有什么方式可以使用 calc() 替代，并且 calc() 的兼容性比 box-sizing  差很多。使用 calc() 还是 box-sizing 大家可以自行判断。
+
+但是并不推荐在全站 css-reset 的时候添加。box-sizing:border-box ,如果你这样使用的话，会出现一些奇奇怪怪的问题，引入的第三方组件库可能会因为这条 css-reset 造成样式错乱（毕竟重新定义了 width 嘛)
 
 但是下面 button 的位置如何确定呢？请听下回分解。

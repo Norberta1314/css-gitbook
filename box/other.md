@@ -2,7 +2,7 @@
 
 搞清楚了 盒子与之间的关系， 很多问题都可以解决了，比如说 Card 的Title 如何放置，Content 如何放置，等等。但是还有额外的细节需要我们解决：
 
-![图片](https://uploader.shimo.im/f/mn3Kro7ArDsjX6wr.png!thumbnail)
+<img src='./img/img_6.png' width=400/>
 
 Title后面额外的显示以及操作， 是使用 float 布局还是使用 absolute？我认为分两种情况：
 
